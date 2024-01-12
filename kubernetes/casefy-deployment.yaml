@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: casefy-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: casefy
+  template:
+    metadata:
+      labels:
+        app: casefy
+    spec:
+      containers:
+        - name: casefy
+          image: gcr.io/eternal-calling-408522/casefy:v1
+          ports:
+            - containerPort: 80
+          env:
+            - name: API_BASE_URL
+              value: "http://judge-opinioner-service:8001"
